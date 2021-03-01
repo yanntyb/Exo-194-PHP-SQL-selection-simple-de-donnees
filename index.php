@@ -1,15 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 <?php
-
-/**
- * 1. Importez le fichier SQL se trouvant dans le dossier SQL.
- * 2. Connectez vous à votre base de données avec PHP
- * 3. Sélectionnez tous les utilisateurs et affichez toutes les infos proprement dans un div avec du css
- *    ex:  <div class="classe-css-utilisateur">
- *              utilisateur 1, données ( nom, prenom, etc ... )
- *         </div>
- *         <div class="classe-css-utilisateur">
- *              utilisateur 2, données ( nom, prenom, etc ... )
- *         </div>
- * 4. Faites la même chose, mais cette fois ci, triez le résultat selon la colonne ID, du plus grand au plus petit.
- * 5. Faites la même chose, mais cette fois ci en ne sélectionnant que les noms et les prénoms.
- */
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=exo194', "root", "");
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $response = $pdo->prepare("SELECT * FROM user");
+    $response->execute();
+    $result = $response->fetchAll(PDO::FETCH_ASSOC);?>
+    <div class="title"><?php
+        foreach(array_keys($result[0]) as $key) {?>
+            <span class="title_case"><?php echo $key?></span><?php
+        }
+    ?>
+    </div><?php
+    foreach ($result as $data => $item) {
+        ?>
+        <div class="info"><?php
+        foreach ($item as $value) { ?>
+            <span><?php echo $value ?></span><?php
+        } ?>
+        </div> <?php
+    }
+} catch (PDOException $e) {
+    echo $e->getMessage();
+} ?>
+</body>
+</html>

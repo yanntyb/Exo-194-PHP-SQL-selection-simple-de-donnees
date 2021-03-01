@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.info, .title{
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+span{
+    font-size: 2rem;
+    width: 10vw;
+    padding: 0.5%;
+    border: 1px solid coral;
+}
+
+.info:hover {
+    background-color: gainsboro;
+}
+
+span:hover:not(.title_case){
+    background-color: darkseagreen;
+}
+
+.title{
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
+}
